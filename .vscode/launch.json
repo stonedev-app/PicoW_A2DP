@@ -6,52 +6,50 @@
             "cwd": "${workspaceRoot}",
             "executable": "${command:cmake.launchTargetPath}",
             "request": "launch",
-            // to install you may need to patch vsix manifest of mcu-debug/peripheral-viewer
             "type": "cortex-debug",
-            // in settings.json add "cortex-debug.openocdPath": "/home/joachim/pico/openocd/src/openocd"
             "servertype": "openocd",
-            // tumbleweed has multiarch gdb
-            "gdbPath" : "gdb",
+            "serverpath": "${env:OPEN_OCD_PATH}",
+            "searchDir": [
+                "${env:OPEN_OCD_TCL_PATH}",
+            ],
+            "gdbPath": "arm-none-eabi-gdb",
             "device": "RP2040",
             "configFiles": [
                 "interface/cmsis-dap.cfg",
                 "target/rp2040.cfg"
             ],
-            "svdFile": "/home/joachim/pico/pico-sdk/src/rp2040/hardware_regs/rp2040.svd",
-            "runToMain": true,
+            "svdFile": "${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd",
+            "runToEntryPoint": "main",
             // Work around for stopping at main on restart
             "postRestartCommands": [
                 "break main",
                 "continue"
-            ],
-            "openOCDLaunchCommands": ["adapter speed 5000"],
-            "searchDir": ["/home/joachim/pico/openocd/tcl"],
+            ]
         },
         {
             "name": "Pico Debug Attach",
             "cwd": "${workspaceRoot}",
             "executable": "${command:cmake.launchTargetPath}",
             "request": "attach",
-            // to install you may need to patch vsix manifest of mcu-debug/peripheral-viewer
             "type": "cortex-debug",
-            // in settings.json add "cortex-debug.openocdPath": "/home/joachim/pico/openocd/src/openocd"
             "servertype": "openocd",
-            // tumbleweed has multiarch gdb
-            "gdbPath" : "gdb",
+            "serverpath": "${env:OPEN_OCD_PATH}",
+            "searchDir": [
+                "${env:OPEN_OCD_TCL_PATH}",
+            ],
+            "gdbPath": "arm-none-eabi-gdb",
             "device": "RP2040",
             "configFiles": [
                 "interface/cmsis-dap.cfg",
                 "target/rp2040.cfg"
             ],
-            "svdFile": "/home/joachim/pico/pico-sdk/src/rp2040/hardware_regs/rp2040.svd",
-            "runToMain": true,
+            "svdFile": "${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd",
+            "runToEntryPoint": "main",
             // Work around for stopping at main on restart
             "postRestartCommands": [
                 "break main",
                 "continue"
             ],
-            "openOCDLaunchCommands": ["adapter speed 5000"],
-            "searchDir": ["/home/joachim/pico/openocd/tcl"],
         }
     ]
 }
