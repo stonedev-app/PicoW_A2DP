@@ -77,7 +77,7 @@ static void handle_pcm_data(int16_t * data, int num_audio_frames, int num_channe
     }
 
     // adjust volume
-    int32_t volume = 1L + avrcp_get_volume();  // 1..128
+    int32_t volume = avrcp_get_volume();  // 1..128
     int32_t samples = num_audio_frames * NUM_CHANNELS;
     int32_t sample;
     for( size_t i=0; i<samples; ++i ) {
